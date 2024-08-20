@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+  <h1><%= title %></h1>
+  <ul>
+    <% messages.forEach(function(message) { %>
+      <li>
+        <strong>User:</strong> <%= message.user %><br>
+        <strong>Message:</strong> <%= message.text %><br>
+        <strong>Date:</strong> <%= message.date %>
+       <button><a href="/message/<%= message.id %>">Open</a></button> 
+      </li>
+    <% }); %>
+  </ul>
+
+  <button class="newMessage">
+    <a href="/new">Add New Message</a>
+  </button>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favorite TV Shows</title>
+    <link rel="stylesheet" href="/styles/tvshows.css" />
+    <!-- Link to your CSS file -->
+  </head>
+  <body>
+    <div class="main-container">
+      <h1 class="title">Favorite TV Shows</h1>
+      <nav>
+        <ul>
+          <li><a href="/new">Add Favorite TV Show</a></li>
+          <li><a href="/deletetvshows">Delete TV Shows</a></li>
+        </ul>
+      </nav>
+
+      <div class="card-container">
+        <% tvShows.forEach(show => { %>
+        <div class="card">
+          <h2><%= show.name %></h2>
+          <% if (show.image_url) { %>
+          <img
+            src="<%= show.image_url %>"
+            alt="<%= show.name %>"
+            class="card-image"
+          />
+          <% } %>
+          <p><strong>Genre:</strong> <%= show.genre %></p>
+          <p><strong>Episodes:</strong> <%= show.episodes %></p>
+          <p><strong>Status:</strong> <%= show.status %></p>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

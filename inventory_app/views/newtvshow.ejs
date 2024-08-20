@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New TV Show</title>
+    <link rel="stylesheet" href="/styles/tvshows.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <h1 class="title">Add Favorite TV Show</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Favorite TV shows</a></li>
+            <li><a href="/deletetvshows">Delete TV Shows</a></li>
+        </ul>
+    </nav>
+
+    <form action="/new" method="post" class="form">
+      <div class="form-box">
+        <div class="form-group">
+            <label for="name">TV Show Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" name="genre" required>
+        </div>
+        <div class="form-group">
+            <label for="episodes">Episodes:</label>
+            <input type="number" id="episodes" name="episodes" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="Watched">Watched</option>
+                <option value="Watching">Watching</option>
+            </select>
+        </div>
+        <div>
+            <label for="image_url">Image URL:</label>
+            <input type="text" id="image_url" name="image_url" required>
+        </div>
+        <button type="submit" class="add-button">Add TV Show</button>
+      </div>
+    </form>
+</body>
+</html>
