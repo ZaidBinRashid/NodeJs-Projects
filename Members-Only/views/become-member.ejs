@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Become a Member</title>
+    <link rel="stylesheet" href="/styles/userstatus.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Become a Member</h1>
+      <form action="/become-member" method="POST">
+        <div>
+          <label for="secretKeymember">Enter Secret Key:</label>
+          <input type="text" id="secretKey" name="secretKeymember" required />
+        </div>
+
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+    </form>
+    <a href="/posts"><button class="back-posts">Back to Posts</button></a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create a Post</title>
+    <link rel="stylesheet" href="/styles/create.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Create a Post</h1>
+    <form action="/create-post" method="POST">
+  
+      <div>
+        <label for="text">Message:</label>
+        <textarea id="text" name="content" required></textarea>
+      </div>
+
+      <div>
+        <input type="hidden" name="username" value="<%= user.username %>" />
+        <button type="submit">Post</button>
+      </div>
+    </form>
+    <div>
+      <a href="/posts"><button>All Posts</button></a>
+  </div>
+    </div>
+  </body>
+</html>

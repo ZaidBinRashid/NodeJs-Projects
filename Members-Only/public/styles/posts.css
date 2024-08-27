@@ -1,0 +1,104 @@
+body {
+    font-family: monospace;
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f4;
+    font-size: larger;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  h1 {
+    margin: 0;
+  }
+  .post-container {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .post-container p {
+    margin: 0;
+  }
+  .create-post-button,
+  .logout-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  .create-post-button:hover {
+    background-color: #0056b3;
+  }
+
+  .admin-button,
+  .member-button {
+    background-color: #ff8400;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .member-button:hover {
+    background-color: #b37400;
+  }
+
+  .admin-button:hover {
+    background-color: #b37400;
+  }
+
+  .message {
+    position: absolute;
+    margin: 0;
+    left: 190px;
+    top: 100px;
+  }
+
+  .welcome {
+    text-align: center;
+    border-bottom: 2px solid rgb(167, 167, 167);
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .post-list {
+    border-bottom: 2px solid rgb(178, 177, 177);
+    list-style: none;
+    margin-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  ul {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .user-post {
+    padding-top: 8px;
+  }
+
+  .delete-button {
+    background-color: #ff0000;
+    color: white;
+    padding: 5px 5px;
+    text-decoration: none;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 40px;
+    margin-top: 20px;
+  }
+
+  .delete-button:hover {
+    background-color: #fd3a3a;
+  }

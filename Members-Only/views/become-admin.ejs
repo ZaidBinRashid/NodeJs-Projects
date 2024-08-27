@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Become Admin</title>
+    <link rel="stylesheet" href="/styles/userstatus.css" />
+  </head>
+  <body>
+   <div class="container">
+    <h1>Become Admin</h1>
+    <form action="/become-admin" method="POST">
+      <div>
+        <label for="secretKeyadmin">Enter Admin Secret Key:</label>
+        <input type="password" id="secretKey" name="secretKeyadmin" required />
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+      <a href="/posts"><button class="back-posts">Back to Posts</button></a>
+   </div>
+
+  </body>
+</html>

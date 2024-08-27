@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Posts</title>
+    <link rel="stylesheet" href="/styles/posts.css" />
+  </head>
+  <body>
+    <h1 class="welcome">Welcome <%= user.username %></h1>
+    <div class="header">
+      <h1>All Posts</h1>
+      <div class="button-container">
+        <% if (userIsAdmin && userIsMember) { %>
+        <p class="message">You are both a member and an admin!</p>
+        <% } else if (userIsAdmin) { %>
+        <p class="message">You are an admin!</p>
+        <% if (!userIsMember) { %>
+        <a href="/become-member"
+          ><button class="member-button">Become Member</button></a
+        >
+        <% } %> <% } else if (userIsMember) { %>
+        <p class="message">You are a member!</p>
+        <a href="/become-admin"
+          ><button class="admin-button">Become Admin</button></a
+        >
+        <% } else { %>
+        <a href="/become-admin"
+          ><button class="admin-button">Become Admin</button></a
+        >
+        <a href="/become-member"
+          ><button class="member-button">Become Member</button></a
+        >
+        <% } %>
+
+        <a href="/create-post"
+          ><button class="create-post-button">Create Post</button></a
+        >
+      </div>
+    </div>
+
+    <div class="post-container">
+      <ul>
+        <% posts.forEach(post => { %>
+        <li class="post-list">
+          <form
+            action="/posts/<%= post.id %>/delete"
+            method="POST"
+            style="display: inline"
+          >
+            <% if (userIsAdmin) { %>
+
+            <button type="submit" class="delete-button">Delete</button>
+            <% } %>
+          </form>
+          <strong>Posted by:</strong>
+          <% if (userIsMember && post.username) { %> <%= post.username %> <% }
+          else { %> anonymous <% } %>
+          <p class="user-post">-> <%= post.content %></p>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+    <a href="/"><button class="logout-button">Log Out</button></a>
+  </body>
+</html>
