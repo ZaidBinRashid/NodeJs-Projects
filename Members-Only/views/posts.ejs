@@ -49,13 +49,19 @@
             style="display: inline"
           >
             <% if (userIsAdmin) { %>
-
             <button type="submit" class="delete-button">Delete</button>
             <% } %>
           </form>
           <strong>Posted by:</strong>
-          <% if (userIsMember && post.username) { %> <%= post.username %> <% }
-          else { %> anonymous <% } %>
+
+          <% if (userIsMember && post.username) { %>
+            <%= post.username %> 
+          <% } else if (userIsAdmin || userIsMember) { %>
+            <%= post.username %> 
+          <% } else { %>
+            anonymous 
+          <% } %>
+
           <p class="user-post">-> <%= post.content %></p>
         </li>
         <% }) %>
