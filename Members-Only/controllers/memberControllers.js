@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
-const db = require("../db/queries");
+const models = require("../models/queries");
 const passport = require("passport");
+const { body, validationResult } = require("express-validator")
+
 
 // Middleware to ensure the user is authenticated
 function ensureAuthenticated(req, res, next) {
@@ -19,15 +21,29 @@ async function signUpPageGet(req, res) {
 }
 
 async function signUpPost(req, res, next) {
+   // Add validation and sanitization
+   await body('firstname').trim().escape().notEmpty().withMessage('First name is required').run(req);
+   await body('lastname').trim().escape().notEmpty().withMessage('Last name is required').run(req);
+   await body('username').trim().escape().notEmpty().withMessage('User name is required').run(req);
+   await body('password').trim().isLength({ min: 8 }).withMessage('Password must be at least 8 characters long').run(req);
+   await body('confirmPassword').trim().isLength({ min: 8 }).withMessage('Confirm Password must be at least 8 characters long').run(req);
+ 
+   // Check for validation errors
+   const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+    return res.render("signUp", { errors: errors.array() });
+   }
+
+
   const { firstname, lastname, username, password, confirmPassword } = req.body;
 
   if (password !== confirmPassword) {
-    return res.send("Passwords do not match!");
+    return res.render("signUp", { errors: [{ msg: "Passwords do not match!" }] });
   }
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    await db.signUpInfo(firstname, lastname, username, hashedPassword, false);
+    await models.signUpInfo(firstname, lastname, username, hashedPassword, false);
     res.redirect("/log-in");
   } catch (err) {
     return next(err);
@@ -51,11 +67,22 @@ async function createPostGet(req, res) {
 }
 
 async function createPost(req, res) {
+  // Add validation and sanitization
+  await body('content').trim().escape().notEmpty().withMessage('Content is required').run(req);
+
+  // Check for validation errors
+  const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+    return res.render("create-post", { errors: errors.array() });
+   }
+ 
+
+
   const {username, content } = req.body;
 
   try {
     // Always save the actual username in the database
-    await db.postInfo(username, content);
+    await models.postInfo(username, content);
     res.redirect('/posts');
   } catch (err) {
     console.error("Error saving post:", err);
@@ -65,7 +92,7 @@ async function createPost(req, res) {
 
 async function showPostsPage(req, res) {
   try {
-    const posts = await db.getAllPosts(); // Fetch all posts from the database
+    const posts = await models.getAllPosts(); // Fetch all posts from the database
     const userIsMember = req.user && req.user.ismember; // Check if the user is a member
     const userIsAdmin = req.user && req.user.isadmin;
 
@@ -90,11 +117,21 @@ async function becomeMemberPageGet(req, res) {
 const SECRET_KEY = 'vibgyor';
 
 async function becomeMemberPost(req, res) {
+   // Add validation and sanitization
+   await body('secretKeymember').trim().escape().notEmpty().withMessage('Secret key is required').run(req);
+
+   // Check for validation errors
+   const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+    return res.render("become-member", { errors: errors.array() });
+   }
+
+
   const { secretKeymember } = req.body;
 
   if (secretKeymember === SECRET_KEY) {
     try {
-      await db.updateMembershipStatus(req.user.username, true);
+      await models.updateMembershipStatus(req.user.username, true);
       res.redirect('/posts');
     } catch (err) {
       console.error("Error updating membership status:", err);
@@ -113,11 +150,20 @@ async function adminGet(req, res) {
 const SECRET_KEY_ADMIN = 'nikola'; 
 
 async function becomeAdminPost(req, res) {
+   // Add validation and sanitization
+   await body('secretKeyadmin').trim().escape().notEmpty().withMessage('Admin key is required').run(req);
+
+   // Check for validation errors
+   const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+    return res.render("become-admin", { errors: errors.array() });
+   }
+
   const { secretKeyadmin } = req.body;
 
   if (secretKeyadmin === SECRET_KEY_ADMIN) {
     try {
-      await db.updateAdminStatus(req.user.username, true);
+      await models.updateAdminStatus(req.user.username, true);
       res.redirect('/posts');
     } catch (err) {
       console.error("Error updating admin status:", err);
@@ -136,7 +182,7 @@ async function deletePost(req, res) {
   }
 
   try {
-    await db.deletePostById(postId);  // Call the delete function with the correct postId
+    await models.deletePostById(postId);  // Call the delete function with the correct postId
     res.redirect('/posts');  // Redirect to the posts page after deletion
   } catch (err) {
     console.error("Error deleting post:", err);

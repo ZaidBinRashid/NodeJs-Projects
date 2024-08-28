@@ -8,6 +8,16 @@
   </head>
   <body>
     <div class="container">
+
+      <!-- Display validation errors -->
+      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+        <ul>
+          <% errors.forEach(function(error) { %>
+          <li style="color: red"><%= error.msg %></li>
+          <% }); %>
+        </ul>
+        <% } %>
+
       <h1>Become a Member</h1>
       <form action="/become-member" method="POST">
         <div>

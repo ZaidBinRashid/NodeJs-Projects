@@ -9,14 +9,14 @@ const app = express();
 const passport = require("passport");
 const flash  = require('express-flash')
 const session  = require('express-session')
-const db = require('./db/queries')
+const models = require('./models/queries')
 
 
 const initializePassport = require("./passport-config");
 initializePassport(
   passport,
-  db.getUserByUsername,
-  db.getUserById
+  models.getUserByUsername,
+  models.getUserById
 );
 
 

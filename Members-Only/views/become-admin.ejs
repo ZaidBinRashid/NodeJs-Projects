@@ -8,6 +8,16 @@
   <body>
    <div class="container">
     <h1>Become Admin</h1>
+
+    <!-- Display validation errors -->
+    <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+      <ul>
+        <% errors.forEach(function(error) { %>
+        <li style="color: red"><%= error.msg %></li>
+        <% }); %>
+      </ul>
+      <% } %>
+
     <form action="/become-admin" method="POST">
       <div>
         <label for="secretKeyadmin">Enter Admin Secret Key:</label>
