@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    padding: 10px;
+    font-family:'Courier New', Courier, monospace;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: large;
+    text-align: center;
+}
+
+#container{
+    background-color: white;
+    color: black;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+}
+
+/* img{
+   max-width: 100%;
+   height: auto;
+   object-fit: contain;
+   
+} */
+
+.post {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-top: 1px solid black;
+}
+
+.edit-btn{
+    padding: 10px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn:hover{
+    background-color: #218838;
+}
+
+.delete-btn{
+    padding: 10px;
+    font-size: 16px;
+    background-color: #a72828;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover{
+    background-color: #882121;
+}
+
+.logout-btn{
+    padding: 10px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-btn:hover{
+    background-color: #218838;
+}
+
+.create-btn{
+    padding: 10px;
+    font-size: 16px;
+    background-color: #283ba7;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.create-btn:hover{
+    background-color: #214288;
+}

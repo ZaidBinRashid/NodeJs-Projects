@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Post</title>
+    <link rel="stylesheet" href="../css/creatPost.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Create a Blog Post</h1>
+      <div id="postError" class="error"></div>
+
+      <form id="postForm">
+        <!-- Title -->
+        <label for="title">Post Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Enter your blog post title"
+          required
+        />
+
+        <!-- Content -->
+        <label for="content">Post Content</label>
+        <textarea
+          id="content"
+          name="content"
+          placeholder="Write your blog content here"
+          required
+        ></textarea>
+
+        
+        <!-- Image Upload -->
+        <label for="image">Upload Image</label>
+        <input type="text" id="image" name="image" />
+
+        <div>
+          <label for="status">Status:</label>
+          <select id="status" name="status" required>
+              <option value="DRAFT">Draft</option>
+              <option value="PUBLISHED">Published</option>
+          </select>
+      </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Create Post</button>
+      </form>
+    </div>
+
+    <a href="./adminPost.html"><button>Back to Posts</button></a>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

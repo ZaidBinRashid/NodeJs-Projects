@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int        @id @default(autoincrement()) // Primary key
+  username     String     @unique
+  passwordHash String
+  email        String     @unique
+  role         Role // Enum for user roles (admin or user)
+  blogs        BlogPost[] @relation("BlogAuthor") // One-to-many relationship (a user can write multiple blogs)
+  comments     Comment[] // One-to-many relationship (a user can write multiple comments)
+
+  createdAt DateTime @default(now()) // Automatically sets the current time when created
+}
+
+model BlogPost {
+  id        Int        @id @default(autoincrement()) // Primary key
+  title     String
+  content   String
+  author    User       @relation("BlogAuthor", fields: [authorId], references: [id]) // Relationship to User
+  authorId  Int // Foreign key linking to User model
+  status    BlogStatus // Enum for draft/published status
+  comments  Comment[] // One-to-many relationship (a blog post can have 
+  imageUrl  String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt // Automatically sets the current time when updated
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement()) // Primary key
+  blogPost   BlogPost @relation(fields: [blogPostId], references: [id]) // Relationship to BlogPost
+  blogPostId Int // Foreign key linking to BlogPost model
+  user       User     @relation(fields: [userId], references: [id]) // Relationship to User
+  userId     Int // Foreign key linking to User model
+  comment    String
+  createdAt  DateTime @default(now())
+}
+
+// Enum for user roles (admin/user)
+enum Role {
+  ADMIN
+  USER
+}
+
+// Enum for blog post status (draft/published)
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
