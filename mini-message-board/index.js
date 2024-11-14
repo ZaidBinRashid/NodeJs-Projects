@@ -14,6 +14,6 @@ app.use('/', messageRoute)
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.listen(1010, () => {
+app.listen(2000, () => {
   console.log("Server started at port 1010");
 });
