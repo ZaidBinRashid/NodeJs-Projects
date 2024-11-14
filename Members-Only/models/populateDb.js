@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS users (
   lastname VARCHAR(255) NOT NULL,
   username VARCHAR(255),
   password VARCHAR(255) NOT NULL,
-  ismember BOOLEAN DEFAULT false
+  ismember BOOLEAN DEFAULT false,
+  isadmin BOOLEAN DEFAULT false
 );
 
 CREATE TABLE post (
