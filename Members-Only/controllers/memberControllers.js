@@ -114,8 +114,6 @@ async function becomeMemberPageGet(req, res) {
   res.render('become-member');
 }
 
-const SECRET_KEY = 'vibgyor';
-
 async function becomeMemberPost(req, res) {
    // Add validation and sanitization
    await body('secretKeymember').trim().escape().notEmpty().withMessage('Secret key is required').run(req);
@@ -129,7 +127,7 @@ async function becomeMemberPost(req, res) {
 
   const { secretKeymember } = req.body;
 
-  if (secretKeymember === SECRET_KEY) {
+  if (secretKeymember === process.env.MEMBER_KEY) {
     try {
       await models.updateMembershipStatus(req.user.username, true);
       res.redirect('/posts');
@@ -146,9 +144,6 @@ async function adminGet(req, res) {
   res.render("become-admin");
 }
 
-
-const SECRET_KEY_ADMIN = 'nikola'; 
-
 async function becomeAdminPost(req, res) {
    // Add validation and sanitization
    await body('secretKeyadmin').trim().escape().notEmpty().withMessage('Admin key is required').run(req);
@@ -161,7 +156,7 @@ async function becomeAdminPost(req, res) {
 
   const { secretKeyadmin } = req.body;
 
-  if (secretKeyadmin === SECRET_KEY_ADMIN) {
+  if (secretKeyadmin === process.env.SECRET_KEY_ADMIN) {
     try {
       await models.updateAdminStatus(req.user.username, true);
       res.redirect('/posts');
